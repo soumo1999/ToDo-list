@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="to-do.css">
+</head>
+<body>
+    <h1 id="heading">To Do List</h1>
+    <div class="container mt-5 col-6">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Add work" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button id="add-btn" class="btn btn-outline-success" type="button" id="button-addon2">Add</button>
+        </div>
+        <ul id="parent" class="list-group">
+            <!--li class="list-group-item">An item</li-->
+          </ul>
+    </div>
+
+    <script>
+        let addBtn = document.getElementById('add-btn')
+        addBtn.addEventListener('click', addwork)
+        function addwork(e){
+            let currentBtn = e.currentTarget
+            let currentInput = currentBtn.previousElementSibling.value
+            
+            let newLi = document.createElement('li')
+            // newLi.classList.add('list-group-item')
+            newLi.className = "list-group-item d-flex justify-content-between"
+            let data = `<h3 class="flex-grow-1">${currentInput}</h3><button class="btn btn-warning mx-3" onclick="editItem(this)">Edit</button>
+            <button class="btn btn-danger" onclick="removeItem(this)">Remove</button>`
+            newLi.innerHTML = data
+
+            let parentList = document.getElementById('parent')
+            parentList.appendChild(newLi)
+        }
+
+        function removeItem(e){
+            // console.log(e)
+            // console.log(e.parentElement)
+            e.parentElement.remove()
+        }
+
+        function editItem(e){
+            let change = prompt("Enter the work to be done","")
+            // console.log(e.previousElementSibling)
+            e.previousElementSibling.textContent = change
+        }
+    </script>
+</body>
+</html>
